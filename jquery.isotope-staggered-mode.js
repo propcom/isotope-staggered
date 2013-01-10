@@ -26,15 +26,18 @@ $.extend( $.Isotope.prototype, {
 	        	atomW = $this.outerWidth(true),
 	        	atomH = $this.outerHeight(true),
 	        	category = $.data( this, 'isotope-sort-data' )[ sortBy ],
+	        	totalAtomW = alternateRow ? atomW * 2 : atomW,
 	        	x, y;
 
 	        // Can this element fit in this row?
-	        if (remainingWidth >= (atomW + instance.options.staggeredMode.gutter)) {
+	        if (remainingWidth >= totalAtomW) {
 
-	        	// Where does it need to go?
+	        	// Where does 'y' need to go?
         		props.y = props.y > 0 ? props.y : 0;
 	        	
 	        } else {
+
+	        	console.log('new row');
 
 	        	// Reset remaining width...
 	        	remainingWidth = containerWidth;
@@ -47,13 +50,13 @@ $.extend( $.Isotope.prototype, {
 
 	        }
 
-	        // Where does it need to go?
+	        // Where does 'x' need to go?
 	        x = alternateRow ? (containerWidth - remainingWidth) + instance.options.staggeredMode.gutter : (containerWidth - remainingWidth);
         	props.x = x;
 
 	        // Shave some pixels off remaing width...
 	        remainingWidth -= atomW;
-
+	        
 	        // position the atom
 		    instance._pushPosition( $this, props.x, props.y );
 	        props.height = Math.max( props.y + atomH, props.height );
