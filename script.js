@@ -10,6 +10,7 @@ $(function(){
     itemSelector: '.element',
     layoutMode: 'staggeredMode',
     staggeredMode: {
+    	orientation : 'horizontal',
         gutter : 145
     }
   });
